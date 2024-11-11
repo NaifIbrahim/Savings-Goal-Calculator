@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savings Goal Calculator</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Body Styling */
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f9;
+            padding: 20px;
+        }
+
+        /* Main Container */
+        .container {
+            background: #ffffff;
+            max-width: 500px;
+            width: 100%;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Headings */
+        h2 {
+            color: #000000;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        p {
+            color: #000000;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* Form Field Styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            color: #000000;
+            margin-bottom: 8px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .input-group input {
+            width: 100%;
+            max-width: 100px;
+        }
+
+        /* Range Slider Styling */
+        input[type="range"] {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* Result Box Styling */
+        .result {
+            background-color: #f7f7f7;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        /* Buttons Styling */
+        .btn {
+            background-color: #ff5252;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .btn-reset {
+            background-color: #000000;
+            color: #ffffff;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        /* Loader */
+        .loader {
+            display: none;
+            border: 4px solid #ddd;
+            border-top: 4px solid #ff5252;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin: auto;
+            margin-top: 10px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 500px) {
+            h2 {
+                font-size: 20px;
+            }
+
+            p {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Savings Goal Calculator</h2>
+        <p>Calculate how much you need to save each month to reach your goal.</p>
+
+        <!-- Savings Goal Input -->
+        <div class="form-group">
+            <label for="goalAmount">How much do you want to save?</label>
+            <input type="number" id="goalAmount" placeholder="Enter amount (e.g., 100000)" />
+        </div>
+
+        <!-- Inflation Rate and Years Input -->
+        <div class="form-group">
+            <div class="input-group">
+                <label>Inflation Rate (%)</label>
+                <input type="number" id="inflationRate" value="3" min="0" max="10" />
+            </div>
+
+            <label for="years">How many years are you planning to save for?</label>
+            <input type="range" id="years" min="1" max="35" value="10" oninput="displayYearValue()" />
+            <div id="yearDisplay">10 years</div>
+        </div>
+
+        <!-- Future Value Result -->
+        <div class="result" id="futureValueResult"></div>
+
+        <!-- Monthly Savings Result and Loader -->
+        <div class="loader" id="loader"></div>
+        <div class="result" id="result"></div>
+
+        <!-- Buttons -->
+        <button class="btn" onclick="calculate()">Calculate</button>
+        <button class="btn btn-reset" onclick="resetCalculation()">Reset Calculation</button>
+    </div>
+
+    <script>
+        function displayYearValue() {
+            const years = document.getElementById('years').value;
+            document.getElementById('yearDisplay').textContent = `${years} years`;
+        }
+
+        function calculate() {
+            const goalAmount = parseFloat(document.getElementById('goalAmount').value);
+            const inflationRate = parseFloat(document.getElementById('inflationRate').value) / 100;
+            const years = parseInt(document.getElementById('years').value);
+            const investmentRate = 0.05; // Fixed investment rate at 5%
+
+            if (isNaN(goalAmount) || isNaN(inflationRate) || isNaN(years)) {
+                alert('Please fill in all fields with valid values.');
+                return;
+            }
+
+            document.getElementById('loader').style.display = 'block';
+            document.getElementById('result').textContent = '';
+            document.getElementById('futureValueResult').textContent = '';
+
+            setTimeout(() => {
+                const futureValue = goalAmount * Math.pow(1 + inflationRate, years);
+                const monthlySavings = (futureValue * investmentRate / 12) / (Math.pow(1 + investmentRate / 12, years * 12) - 1);
+
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('futureValueResult').textContent = `The future value of your desired saving in ${years} years is S$${futureValue.toFixed(2)}`;
+                document.getElementById('result').textContent = `You need to save S$${monthlySavings.toFixed(2)} monthly to reach your goal.`;
+            }, 1000);
+        }
+
+        function resetCalculation() {
+            document.getElementById('goalAmount').value = '';
+            document.getElementById('inflationRate').value = 3;
+            document.getElementById('years').value = 10;
+            document.getElementById('yearDisplay').textContent = '10 years';
+            document.getElementById('futureValueResult').textContent = '';
+            document.getElementById('result').textContent = '';
+        }
+    </script>
+
+</body>
+</html>
