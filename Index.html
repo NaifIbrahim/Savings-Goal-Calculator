@@ -356,8 +356,8 @@
                 const monthlySavings = (futureValue * investmentRate / 12) / (Math.pow(1 + investmentRate / 12, years * 12) - 1);
 
                 document.getElementById('loader').style.display = 'none';
-                document.getElementById('futureValueResult').textContent = `The future value of your desired saving in ${years} years is S$${futureValue.toFixed(2)}`;
-                document.getElementById('result').textContent = `You need to save S$${monthlySavings.toFixed(2)} monthly to reach your goal.`;
+                document.getElementById('futureValueResult').textContent = `The future value of your desired saving in ${years} years is Rs:${futureValue.toFixed(2)}`;
+                document.getElementById('result').textContent = `You need to save Rs:${monthlySavings.toFixed(2)} monthly to reach your goal.`;
             }, 1000);
         }
 
