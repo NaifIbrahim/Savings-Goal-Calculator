@@ -295,13 +295,13 @@
         <p>Calculate how much you need to save each month to reach your goal.</p>
 
         <!-- Savings Goal Input -->
-        <div class="form-group">
-            <label for="goalAmount">How much do you want to save?</label>
+        <div style="margin-left: 2px;" class="form-group">
+            <label for="goalAmount" style="margin-top: 20px;">How much do you want to save?</label>
             <input type="number" id="goalAmount" placeholder="Enter amount (e.g., 100000)" />
         </div>
 
         <!-- Inflation Rate and Years Input -->
-        <div class="form-group">
+        <div style="margin-left: 2px;" class="form-group">
             <div class="input-group">
                 <label>Inflation Rate (%)</label>
                 <input type="number" id="inflationRate" value="3" min="0" max="10" />
@@ -309,7 +309,7 @@
 
             <label for="years">How many years are you planning to save for?</label>
             <input type="range" id="years" min="1" max="42" value="10" oninput="displayYearValue()" />
-            <div id="yearDisplay">10 years</div>
+            <div style="font-weight: bold;" id="yearDisplay">10 years</div>
         </div>
 
         <!-- Future Value Result -->
