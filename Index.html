@@ -8,20 +8,125 @@
     <style>
         /* General Reset */
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
-        /* Body Styling */
+        /* Navbar styles */
+        .navbar {
+            width: 100%;
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #000000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-shadow: 0 2px 5px rgba(82, 82, 82, 0.2);
+            z-index: 1000;
+            padding: 10px 20px;
+            height: 60px;
+        }
+
+        .logo-img {
+            margin-top: 2px;
+            width: 60px;
+            height: 60px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            margin: 0;
+        }
+
+        .nav-links li a {
+            margin-right: 20px;
+            color: #000000;
+            text-decoration: none;
+        }
+
+        .nav-links li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hamburger Menu Styling */
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding: 0;
+                background-color: #e0e0e0;
+                position: absolute;
+                top: 60px;
+                left: 0;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links li a {
+                display: block;
+                padding: 10px;
+                text-align: left;
+            }
+        }
+
+        /* Intro Section Styling */
+        .intro-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0px 20px;
+            margin-bottom: 0px !important;
+            padding: 20px;
+            max-width: 800px;
+            width: 100%;
+            background: #fff;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Calculator Section Styling */
+        .container {
+            margin: 0px auto;
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            background: #fff;
+            border-radius: 8px;
+            /* box-shadow: 0 4px 10px rgb(219, 219, 219); */
+        }
+
         body {
             font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f4f4f9;
-            padding: 20px;
         }
 
         /* Main Container */
@@ -29,23 +134,23 @@
             background: #ffffff;
             max-width: 500px;
             width: 100%;
-            padding: 20px;
+            /* padding: 20px; */
             border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            /* box-shadow: 0 4px 10px rgb(141, 141, 141); */
             text-align: center;
         }
 
         /* Headings */
-        h2 {
+        h1 {
             color: #000000;
             margin-bottom: 10px;
-            font-size: 24px;
+            font-size: 2em;
         }
 
         p {
             color: #000000;
-            font-size: 14px;
-            margin-bottom: 20px;
+            /* font-size: 14px; */
+            margin-bottom: 0px;
         }
 
         /* Form Field Styling */
@@ -131,6 +236,13 @@
             margin-top: 10px;
         }
 
+        @media (max-width: 768px) {
+            .intro-section {
+                margin-top: 80px;
+                text-align: center;
+            }
+        }
+
         @keyframes spin {
             0% {
                 transform: rotate(0deg);
@@ -143,12 +255,12 @@
 
         /* Responsive */
         @media (max-width: 500px) {
-            h2 {
-                font-size: 20px;
+            h1 {
+                font-size: 2em;
             }
 
             p {
-                font-size: 13px;
+                /* font-size: 13px; */
             }
         }
     </style>
@@ -156,8 +268,33 @@
 
 <body>
 
+    <header class="navbar">
+        <div class="logo">
+            <img src="images.jfif" alt="Logo" class="logo-img">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">&#9776;</div> <!-- Hamburger icon -->
+        </nav>
+    </header>
+
+    <div class="intro-section">
+        <h1>Savings Goal</h1>
+        <p>
+            Everyone has unique goals—whether it's buying that dream house or traveling the world. Whatever your dreams
+            may be, the sooner you start, the closer you'll get to making them a reality. Use our calculator to find out
+            how to get started.
+        </p>
+
+    </div>
+
     <div class="container">
-        <h2>Savings Goal Calculator</h2>
+        <h1>Savings Goal Calculator</h1>
         <p>Calculate how much you need to save each month to reach your goal.</p>
 
         <!-- Savings Goal Input -->
@@ -174,7 +311,7 @@
             </div>
 
             <label for="years">How many years are you planning to save for?</label>
-            <input type="range" id="years" min="1" max="35" value="10" oninput="displayYearValue()" />
+            <input type="range" id="years" min="1" max="42" value="10" oninput="displayYearValue()" />
             <div id="yearDisplay">10 years</div>
         </div>
 
@@ -191,6 +328,11 @@
     </div>
 
     <script>
+
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('show');
+        }
+
         function displayYearValue() {
             const years = document.getElementById('years').value;
             document.getElementById('yearDisplay').textContent = `${years} years`;
