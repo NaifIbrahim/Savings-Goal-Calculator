@@ -108,13 +108,13 @@
 
         /* Calculator Section Styling */
         .container {
-            margin: 0px auto;
+            margin: 20px auto;
             padding: 20px;
             max-width: 600px;
-            width: 100%;
+            width: 90%;
             background: #fff;
             border-radius: 8px;
-            /* box-shadow: 0 4px 10px rgb(219, 219, 219); */
+            box-shadow: 0 4px 10px rgb(219, 219, 219);
         }
 
         body {
@@ -129,15 +129,14 @@
             min-height: 100vh;
         }
 
-        /* Main Container */
         .container {
-            background: #ffffff;
-            max-width: 500px;
-            width: 100%;
-            /* padding: 20px; */
+            margin-top: 10px;
+            background: #fff;
             border-radius: 8px;
-            /* box-shadow: 0 4px 10px rgb(141, 141, 141); */
-            text-align: center;
+            padding: 20px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 4px 10px rgb(141, 141, 141);
         }
 
         /* Headings */
@@ -196,38 +195,36 @@
             background-color: #f7f7f7;
             border-radius: 6px;
             padding: 15px;
-            margin-top: 20px;
+            /* margin-top: 20px; */
             font-size: 18px;
             color: #000000;
-            font-weight: bold;
+            /* font-weight: bold; */
         }
 
-        /* Buttons Styling */
-        .btn {
-            background-color: #ff5252;
-            color: #fff;
-            border: none;
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .buttons button {
             padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 4px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #001aff;
+            color: white;
             cursor: pointer;
-            width: 100%;
-            max-width: 200px;
         }
 
-        .btn-reset {
-            background-color: #000000;
-            color: #ffffff;
-            margin-top: 10px;
-            width: 100%;
-            max-width: 200px;
+        .buttons button:hover {
+            background-color: #007bff;
         }
 
         /* Loader */
         .loader {
             display: none;
             border: 4px solid #ddd;
-            border-top: 4px solid #ff5252;
+            border-top: 4px solid #001aff;
             border-radius: 50%;
             width: 24px;
             height: 24px;
@@ -257,6 +254,10 @@
         @media (max-width: 500px) {
             h1 {
                 font-size: 2em;
+            }
+
+            .buttons button {
+                padding: 8px 16px;
             }
         }
     </style>
@@ -319,8 +320,10 @@
         <div class="result" id="result"></div>
         <br>
         <!-- Buttons -->
-        <button class="btn" onclick="calculate()">Calculate</button>
-        <button class="btn btn-reset" onclick="resetCalculation()">Reset Calculation</button>
+        <div class="buttons">
+            <button onclick="calculate()">Calculate</button>
+            <button onclick="resetCalculation()">Reset Calculation</button>
+        </div>
     </div>
 
     <script>
